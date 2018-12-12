@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- jQuery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    파이어베이스 웹서버 입니다.
+
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBupIvMXX7CI7tz-3pSka-6jAq1lDlb5WM",
+            authDomain: "fbtestdw.firebaseapp.com",
+            databaseURL: "https://fbtestdw.firebaseio.com",
+            projectId: "fbtestdw",
+            storageBucket: "fbtestdw.appspot.com",
+            messagingSenderId: "815886016113"
+        };
+        firebase.initializeApp(config);
+
+        // [데이터베이스] SDK 초기화
+        var database = firebase.database();
+
+        database.ref('test/').push({
+            "name": "동원니",
+            "location": "seoul"
+        })
+        database.ref('test/').push({
+            "name": "테스트2",
+            "intro": "인삿말"
+        })
+        var dbTestRef = database.ref('test/')
+        dbTestRef.on('child_added', function(data) {
+            console.log(data.val(), 'key: ', data.key)
+        })
+
+        dbTestRef2 = database.ref('test/-LTXsmbCCJx9pG2VrNwg').update({
+            intro: "주머니속에 꼬깃꼬깃"
+        })
+        dbTestRef3 = database.ref('test/-LTXsmbCCJx9pG2VrNwg').remove()
+
+
+
+
+        //     // 구글 인증 기능 추가
+        // var provider = new firebase.auth.GoogleAuthProvider();
+
+        // // 인증하기
+        // firebase.auth().signInWithPopup(provider).then(function(result) {
+        //     // This gives you a Google Access Token. You can use it to access the Google API.
+        //     var token = result.credential.accessToken;
+        //     // The signed-in user info.
+        //     var user = result.user;
+
+        //     console.log(user) // 인증 후 어떤 데이터를 받아오는지 확인해보기 위함.
+        // }).catch(function(error) {
+        //     // Handle Errors here.
+        //     var errorCode = error.code;
+        //     var errorMessage = error.message;
+        //     // The email of the user's account used.
+        //     var email = error.email;
+        //     // The firebase.auth.AuthCredential type that was used.
+        //     var credential = error.credential;
+        // });
+    </script>
+</body>
+
+</html>
